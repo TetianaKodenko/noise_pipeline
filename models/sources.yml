@@ -1,0 +1,8 @@
+version: 2 # Specifies the dbt configuration schema version
+
+sources: # Defines the external data sources located in Snowflake
+  - name: snowflake_raw # The alias we will use to reference this source in our SQL code
+    database: NOISE_DB # The exact name of the database in your Snowflake account
+    schema: NOISE_SCHEMA # The exact name of the schema inside that database
+    tables: # The list of tables we want dbt to read from this schema
+      - name: NOISE_DATA # The name of your raw table containing the mobile phone data
