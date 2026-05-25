@@ -1,0 +1,57 @@
+# Name of the workflow visible in the GitHub Actions UI
+name: Run dbt pipeline
+
+# Triggers for the workflow
+on:
+  schedule:
+    # Runs the workflow every 5 minutes automatically
+    - cron: '*/2 * * * *'
+  # Allows manual triggering of the workflow from the GitHub Actions UI
+  workflow_dispatch:
+
+# Defines the tasks to run
+jobs:
+  dbt-run:
+    # Specifies the virtual machine environment (Ubuntu Linux)
+    runs-on: ubuntu-latest
+
+    # The sequence of steps to execute in this job
+    steps:
+      # Step 1: Downloads your project code from the GitHub repository to the virtual machine
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Installs Python on the virtual machine, specifically version 3.10
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Step 3: Uses pip to install the dbt adapter for Snowflake
+      - name: Install dbt-snowflake
+        run: pip install dbt-snowflake
+
+      # Step 4: Creates the hidden .dbt directory and generates the profiles.yml file needed for connection
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          # Writes the configuration block into ~/.dbt/profiles.yml using environment secrets
+          cat << EOF > ~/.dbt/profiles.yml
+          noise_pipeline:
+            target: dev
+            outputs:
+              dev:
+                type: snowflake
+                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}   # Pulls Account ID from GitHub Secrets
+                user: ${{ secrets.SNOWFLAKE_USER }}         # Pulls Username from GitHub Secrets
+                password: ${{ secrets.SNOWFLAKE_PASSWORD }} # Pulls Password from GitHub Secrets
+                role: ACCOUNTADMIN
+                database: NOISE_DB
+                warehouse: noise_dbt_wh
+                schema: NOISE_SCHEMA
+                threads: 1
+          EOF
+
+      # Step 5: Executes the dbt transformation process
+      - name: Run dbt models
+        run: dbt run
