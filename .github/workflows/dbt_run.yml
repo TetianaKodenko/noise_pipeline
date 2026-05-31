@@ -42,9 +42,9 @@ jobs:
             outputs:
               dev:
                 type: snowflake
-                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}   # Pulls Account ID from GitHub Secrets
-                user: ${{ secrets.SNOWFLAKE_USER }}         # Pulls Username from GitHub Secrets
-                password: ${{ secrets.SNOWFLAKE_PASSWORD }} # Pulls Password from GitHub Secrets
+                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+                user: ${{ secrets.SNOWFLAKE_USER }}
+                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
                 role: ACCOUNTADMIN
                 database: NOISE_DB
                 warehouse: noise_dbt_wh
