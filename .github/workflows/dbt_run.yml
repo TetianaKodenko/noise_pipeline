@@ -4,8 +4,8 @@ name: Run dbt pipeline
 # Triggers for the workflow
 on:
   schedule:
-    # Runs the workflow every 5 minutes automatically
-    - cron: '*/5 * * * *'
+    # Runs the workflow every 2 minutes automatically
+    - cron: '*/2 * * * *'
   # Allows manual triggering of the workflow from the GitHub Actions UI
   workflow_dispatch:
 
