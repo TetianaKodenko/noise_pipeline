@@ -24,5 +24,5 @@ with DAG(
         dbt_cloud_conn_id='dbt_cloud_default', # MATCHES YOUR ENVIRONMENT VARIABLE: AIRFLOW_CONN_DBT_CLOUD_DEFAULT
         account_id=70506183133342, # YOUR DBT CLOUD ACCOUNT ID
         job_id=70506183133603, # YOUR PRODUCTION JOB ID
-        cause='Airflow trigger', # The comment message that will be shown in dbt Cloud history
+        trigger_reason='Airflow trigger', # The comment message that will be shown in dbt Cloud history
     )
