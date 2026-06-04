@@ -23,6 +23,6 @@ with DAG(
         task_id='trigger_dbt_cloud_job', # The name of this step inside the Airflow workflow graph
         dbt_cloud_conn_id='dbt_cloud_default', # MATCHES YOUR ENVIRONMENT VARIABLE: AIRFLOW_CONN_DBT_CLOUD_DEFAULT
         account_id=70506183133342, # YOUR DBT CLOUD ACCOUNT ID
-        job_id=70506183133603, # YOUR PRODUCTION JOB ID
+        job_id=70506183132733, # YOUR PRODUCTION JOB ID
         trigger_reason='Airflow trigger', # The comment message that will be shown in dbt Cloud history
     )
