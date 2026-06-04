@@ -1,7 +1,7 @@
 from datetime import datetime # Import datetime to set the start date for the pipeline
 from datetime import timedelta # Import timedelta to specify the duration of retry delays
 from airflow import DAG # Import the main DAG class to define our workflow
-from airflow.providers.dbt.cloud.operators.dbt_cloud import DbtCloudRunJobOperator # Import the specific operator to trigger jobs in dbt Cloud
+from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator # Import the specific operator to trigger jobs in dbt Cloud
 
 # Define global settings for all tasks in this DAG
 default_args = {
