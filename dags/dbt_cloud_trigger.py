@@ -6,7 +6,7 @@ from airflow.providers.dbt.cloud.operators.dbt_cloud import DbtCloudRunJobOperat
 # Define global settings for all tasks in this DAG
 default_args = {
     'retries': 3, # If the task fails, Airflow will automatically retry it 3 times
-    'retry_delay': timedelta(minutes=5), # Airflow will wait 5 minutes before each retry attempt
+    'retry_delay': timedelta(minutes=2), # Airflow will wait 2 minutes before each retry attempt
 }
 
 # Define the DAG configuration and its timing parameters
@@ -14,7 +14,7 @@ with DAG(
     dag_id='dbt_cloud_trigger', # The unique identifier of this workflow inside the Airflow UI
     default_args=default_args, # Pass the retry settings we defined above into the DAG
     start_date=datetime(2026, 1, 1), # The date from which Airflow is allowed to start running this pipeline
-    schedule_interval=None, # Set to None because we want to trigger this workflow manually
+    schedule_interval='*/2 * * * *', # Set to None because we want to trigger this workflow manually
     catchup=False, # Disable catching up on missed historical runs
 ) as dag:
 
