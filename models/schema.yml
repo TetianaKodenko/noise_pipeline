@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_noise
+    description: "Raw bronze layer table containing landing data directly from the source"
+    columns:
+      - name: timestamp
+        description: "Raw timestamp string from source"
+        tests:
+          - not_null
+
+      - name: noise_level
+        description: "Raw uncleaned noise level measurements"
+        tests:
+          - not_null
+
+  - name: last_10_minutes_noise
+    description: "Final analytical gold table containing cleaned noise level data over time for Tableau dashboard"
+    columns:
+      - name: timestamp
+        description: "The exact cleaned date and time of the noise level measurement used as primary key"
+        tests:
+          - unique
+          - not_null
+
+      - name: noise_level
+        description: "The verified noise level value in decibels"
+        tests:
+          - not_null
