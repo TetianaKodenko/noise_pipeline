@@ -14,7 +14,7 @@ with DAG(
     dag_id='dbt_cloud_trigger', # The unique identifier of this workflow inside the Airflow UI
     default_args=default_args, # Pass the retry settings we defined above into the DAG
     start_date=datetime(2026, 1, 1), # The date from which Airflow is allowed to start running this pipeline
-    schedule='30-59/2 19 * * *', # Runs every 2 minutes from 10:30 AM to 10:58 AM daily, then stops at 11:00 AM
+    schedule='30-59/2 8 * * *', # Runs every 2 minutes from 10:30 AM to 10:58 AM (local time) daily, then stops at 11:00 AM
     catchup=False, # Disable catching up on missed historical runs
 ) as dag:
 
