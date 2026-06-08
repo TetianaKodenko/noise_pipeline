@@ -1,19 +1,6 @@
 version: 2
 
 models:
-  - name: NOISE_DATA
-    description: "Raw bronze layer table containing landing data directly from Snowpipe"
-    columns:
-      - name: DATE_TIME
-        description: "Raw timestamp string from source"
-        tests:
-          - not_null
-
-      - name: NOISE_LEVEL
-        description: "Raw uncleaned noise level measurements"
-        tests:
-          - not_null
-
   - name: stg_noise
     description: "Cleaned silver model where duplicates and null values are completely removed"
     columns:
